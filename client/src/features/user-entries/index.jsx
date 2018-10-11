@@ -12,10 +12,10 @@ class UserEntries extends React.Component {
   }
 
   render() {
-    const { entries, loaded } = this.props
+    const { entries, loaded, persistUserEntries } = this.props
     return <div>
       <h1 style={{color: '#8fcbff'}}>All Users</h1>
-      <UserEntryTable entries={entries} loaded={loaded} />
+      <UserEntryTable persistUserEntries={persistUserEntries} entries={entries} loaded={loaded} />
     </div>
   }
 }
