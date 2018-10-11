@@ -6,17 +6,6 @@ import UserEntryForm from './form'
 
 function submitForm(values, props) {
   const { persistUserEntry } = props
-  
-  //createUserEntry(values).then(json => {
-
-  //  persistUserEntry({ entry: json })
-  //   if (json!==undefined) {
-  //      props.history.push(`/user-entries/${json.id}`)
-  //   } else {
-  //       props.history.push('/')
-  //   }
-
-  //})
 
   createUserEntry(values)
   props.history.push('/')
