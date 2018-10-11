@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getUserEntry } from '../../api/user-entries'
+import { getUserEntry, deleteUserEntry } from '../../api/user-entries'
 
 class ShowUserEntry extends React.Component {
   componentDidMount() {
@@ -13,16 +13,22 @@ class ShowUserEntry extends React.Component {
             this.props.persistUserEntry({ entry: json })
           }) 
         : alert('id undefined: ' + id)
-    //getUserEntry(id).then(json => {
-    //  this.props.persistUserEntry({ entry: json })
-    //})
   }
 
   renderEntry() {
-    const { userEntry: { _id, no, type, name, email} } = this.props
+    const { userEntry: { _id, no, type, name, email }, history } = this.props
     return <div>
       <div><Link to={`/user-entries/${_id}/edit`}>Edit</Link></div>
-      <div><strong>No.</strong> { no }</div>
+      <div>
+        <Link to={`/user-entries/${_id}/edit`}>Edit</Link> | 
+        <a href="#delete" onClick={() => {
+          if (window.confirm(`Are you sure you want to delete this user? (${_id})`)) {
+            deleteUserEntry(_id)
+            history.push(`/`)
+          }
+        }}>Delete</a>
+      </div>
+      <div><strong>ID</strong> { no }</div>
       <div><strong>Type</strong> { type }</div>
       <div>
         <label>Name</label>
