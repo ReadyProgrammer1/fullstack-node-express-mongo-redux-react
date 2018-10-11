@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
+import { deleteUserEntry } from '../../api/user-entries'
+import store from '../../config/store'
 
 function validate(values) {
   const errors = {}
@@ -34,7 +36,6 @@ function renderTextArea({input, label, type, rows, meta: { touched, error }}) {
 
 function UserEntryForm(props) {
   const { handleSubmit, submitting, valid } = props
-
   return <form onSubmit={handleSubmit}>
     <Field name="no" component={renderInput} type="text" label="ID" />
     <Field name="type" component={renderInput} type="text" label="Type" />
@@ -52,6 +53,16 @@ function UserEntryForm(props) {
         className="secondary"
         onClick={() => props.history.push('/')}
       >Cancel</button>
+      <a href="#delete" 
+        onClick={() => {
+          const id = store.getState().userEntries.entry._id
+          if (window.confirm(`Are you sure you want to delete this user? (${id})`)) {
+            deleteUserEntry(id)
+            props.history.push(`/`)
+          }
+        }}
+        style={store.getState().userEntries.entry === undefined ? {visibility: 'hidden'} : {}}
+        >Delete</a>
     </div>
   </form>
 }
