@@ -11,7 +11,6 @@ function submitForm(values, props) {
     json.id
         ? props.history.push(`/user-entries/${json.id}`)
         : props.history.push('/')
-    //props.history.push(`/user-entries/${json.id}`)
   })
 }
 
