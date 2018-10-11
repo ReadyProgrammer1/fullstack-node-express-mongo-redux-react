@@ -11,7 +11,7 @@ module.exports = function(app) {
                 callback(new Error('Not allowed by CORS configuration what?!?'))
             }
         },
-        methods: 'GET, HEAD, PUT, PATCH, POST DELETE',
+        methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
     }
     app.options('*', cors(corsOptions))
     app.use(cors(corsOptions))
